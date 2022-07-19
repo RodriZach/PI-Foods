@@ -9,18 +9,18 @@ module.exports = (sequelize) => {
       defaultValue: DataTypes.UUIDV4,
       primaryKey: true
     },
-    sourceName: {
+    title: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    title: {
+    summary: {
       type: DataTypes.STRING,
       allowNull: false
     },
     healthScore: {
       type: DataTypes.INTEGER
     },
-    sourceUrl: {
+    analyzedInstructions: {
       type: DataTypes.STRING,
       validate: {
         isUrl: true
