@@ -8,7 +8,15 @@ const { Sequelize, Op } = require("sequelize");
 const axios = require("axios");
 
 
+router.get('/', async function(req, res){
+    try {
+        const list = await Diet.findAll();
+        res.json(list)
+    } catch (error) {
+        res.status(404).json({msg: error})
+    }
 
+})
 
 
 

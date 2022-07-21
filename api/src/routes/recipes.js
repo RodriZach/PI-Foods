@@ -10,10 +10,10 @@ const axios = require("axios");
 
 
 const getApiAllRecipes = async function () {
-    //let apiInfo = apiTrucha;
-    //let apiRecipes = await apiInfo.map(a => {
-    let apiInfo = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&number=100`);
-    let apiRecipes = await apiInfo.data.results.map(a => {
+    let apiInfo = apiTrucha;
+    let apiRecipes = await apiInfo.map(a => {
+    //let apiInfo = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&number=100`);
+    //let apiRecipes = await apiInfo.data.results.map(a => {
         return {
             id: a.id,
             title: a.title,
@@ -153,8 +153,21 @@ router.get('/:id', async function (req, res) {
         }
 
     }
-//     let idApi = await getApiIdRecipes(id);
-//     res.json(idApi);
+
+ });
+
+ router.post('/', async function(req, res) {
+    const { title, healthScore, summary, analyzedInstructions, img, diets } = req.body;
+    if(!title || !summary) res.status(404).json({ msg: 'Datos incompletos'})
+    const newRecipe = await Recipe.create({
+        title,
+        healthScore,
+        summary,
+        analyzedInstructions,
+        img
+    });
+    await newRecipe.addDiets(diets);
+    res.send('Receta creada');
  })
 
 

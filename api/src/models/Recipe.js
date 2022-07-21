@@ -18,13 +18,13 @@ module.exports = (sequelize) => {
       allowNull: false
     },
     healthScore: {
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER,
     },
     analyzedInstructions: {
       type: DataTypes.STRING,
-      validate: {
-        isUrl: true
-      }
+    },
+    img: {
+      type: DataTypes.STRING,
     }
 
   }, {
